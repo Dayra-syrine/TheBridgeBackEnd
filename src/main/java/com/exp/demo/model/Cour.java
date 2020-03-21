@@ -19,19 +19,19 @@ public class Cour {
 	private String titre;
 	
 	@Column(name = "description")
-	private String desc;
+	private String description;
 
 	@Column(name = "prix")
 	private String prix;
 
 	@Column(name = "image")
-	private String img;
+	private String image;
 	
 	@Column(name = "video")
-	private String url;
+	private String video;
 	
 	@Column(name = "descV")
-	private String dv;
+	private String descV;
 	
 	
 	
@@ -52,50 +52,29 @@ public class Cour {
 		super();
 	}
 	
-	public Cour(Long id,String titre,String desc,String prix,String img,String url,String dv)
-	{
+
+	public Cour(long id_C, String titre, String description, String prix, String image, String video, String descV,
+			Set<Section> lsection) {
 		super();
-		this.id_C=id;
-		this.titre=titre;
-		this.desc=desc;
-		this.prix=prix;
-		this.img=img;
-		this.url=url;
-		this.dv=dv;
+		this.id_C = id_C;
+		this.titre = titre;
+		this.description = description;
+		this.prix = prix;
+		this.image = image;
+		this.video = video;
+		this.descV = descV;
+		this.lsection = lsection;
 	}
-	
-	public Cour(String titre,String desc,String prix,String img,String url,String dv)
-	{
+
+	public Cour(String titre, String description, String prix, String image, String video, String descV) {
 		super();
-		
-		this.titre=titre;
-		this.desc=desc;
-		this.prix=prix;
-		this.img=img;
-		this.url=url;
-		this.dv=dv;
-		
+		this.titre = titre;
+		this.description = description;
+		this.prix = prix;
+		this.image = image;
+		this.video = video;
+		this.descV = descV;
 	}
-
-	
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public String getDv() {
-		return dv;
-	}
-
-	public void setDv(String dv) {
-		this.dv = dv;
-	}
-
-
 
 	public long getId_C() {
 		return id_C;
@@ -113,12 +92,12 @@ public class Cour {
 		this.titre = titre;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getPrix() {
@@ -129,12 +108,30 @@ public class Cour {
 		this.prix = prix;
 	}
 
-	public String getImg() {
-		return img;
+	public String getImage() {
+		return image;
 	}
 
-	public void setImg(String img) {
-		this.img = img;
+	public void setImage(String image) {
+		this.image = image;
 	}
+
+	public String getVideo() {
+		return video;
+	}
+
+	public void setVideo(String video) {
+		this.video = video;
+	}
+
+	public String getDescV() {
+		return descV;
+	}
+
+	public void setDescV(String descV) {
+		this.descV = descV;
+	}
+	
+	
 	
 }
