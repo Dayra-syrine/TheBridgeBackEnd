@@ -23,7 +23,18 @@ public class User {
 	@Column(name = "Lname")
 	private String Lname;
 	
+	@Column(name = "etat")
+	private String etat;
 	
+	
+	public String getEtat() {
+		return etat;
+	}
+
+	public void setEtat(String etat) {
+		this.etat = etat;
+	}
+
 	public User() {
 		super();
 	}
@@ -47,6 +58,17 @@ public class User {
 		this.psw=psw;
 		this.Fname=fname;
 		this.Lname=lname;
+		
+	}
+	public User(String mail,String psw,String fname,String lname,String etat) {
+
+		super();
+		
+		this.mail=mail;
+		this.psw=psw;
+		this.Fname=fname;
+		this.Lname=lname;
+		this.etat=etat;
 		
 	}
 

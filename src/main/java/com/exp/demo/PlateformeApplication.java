@@ -26,8 +26,9 @@ public class PlateformeApplication {
 		VideoRepository vr = ctx.getBean(VideoRepository.class);
 		CommentaireRepository ccrr=ctx.getBean(CommentaireRepository.class);
 	
-		User u1 = new User("syrinedayra@gmail.com","17Syrine","Dayra","Syrine");
-		User u2 = new User("maryemwaddani@gmail.com","123456789","Waddani","Maryem");
+		User u1 = new User("syrinedayra@gmail.com","17Syrine","Dayra","Syrine","user");
+		User u3 = new User("dayrasyrine@gmail.com","17Syrine","Dayra","Syrine","admin");
+		User u2 = new User("maryemwaddani@gmail.com","123456789","Waddani","Maryem","user");
 		Cour c1 = new Cour("Fullstack Social iOS NodeJS REST","Swift 5.1, SailsMVC, UIKit","500","https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/f8dcb0af-34cb-4ac7-bf51-e285cc83f4b5","https://www.youtube.com/embed/ma6bDuaxETo","descV");
 		Cour c2 = new Cour("Maps UIKit SwiftUI","Swift 5.1, MapKit, Google Places","120","https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/f96b3a9c-72b4-4ba4-a7e0-c12913bb5408","https://www.youtube.com/embed/ma6bDuaxETo","descV");
 		Cour c3 = new Cour("Twitter Slide Out Menu","Swift 5.1, Google Places","150","https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/f96b3a9c-72b4-4ba4-a7e0-c12913bb5408","https://www.youtube.com/embed/ma6bDuaxETo","descV");
@@ -43,6 +44,7 @@ public class PlateformeApplication {
 		cr.save(c6);
 		ur.save(u1);
 		ur.save(u2);
+		ur.save(u3);
 		Commentaire comm= new Commentaire("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa","7");
 		
 		ccrr.save(comm);
