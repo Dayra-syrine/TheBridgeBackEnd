@@ -28,6 +28,7 @@ public class PlateformeApplication {
 	
 		User u1 = new User("syrinedayra@gmail.com","17Syrine","Dayra","Syrine","user");
 		User u3 = new User("dayrasyrine@gmail.com","17Syrine","Dayra","Syrine","admin");
+		User u4 = new User("admin@gmail.com","admin","admin","admin","admin");
 		User u2 = new User("maryemwaddani@gmail.com","123456789","Waddani","Maryem","user");
 		Cour c1 = new Cour("Fullstack Social iOS NodeJS REST","Swift 5.1, SailsMVC, UIKit","500","https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/f8dcb0af-34cb-4ac7-bf51-e285cc83f4b5","https://www.youtube.com/embed/ma6bDuaxETo","descV");
 		Cour c2 = new Cour("Maps UIKit SwiftUI","Swift 5.1, MapKit, Google Places","120","https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/f96b3a9c-72b4-4ba4-a7e0-c12913bb5408","https://www.youtube.com/embed/ma6bDuaxETo","descV");
@@ -45,6 +46,7 @@ public class PlateformeApplication {
 		ur.save(u1);
 		ur.save(u2);
 		ur.save(u3);
+		ur.save(u4);
 		Commentaire comm= new Commentaire("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa","7");
 		
 		ccrr.save(comm);
@@ -58,9 +60,9 @@ public class PlateformeApplication {
 		
 	
 		
-		Video v1 = new Video("1. Course Outline","https://www.youtube.com/embed/ma6bDuaxETo","https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/28d11ecb-d204-4855-a8d8-a6bfa7aec2af_medium","33:30",s1);
-		Video v2 = new Video("2. Course Preparation and Expectations","https://www.youtube.com/embed/ma6bDuaxETo","https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/28d11ecb-d204-4855-a8d8-a6bfa7aec2af_medium","15:30",s1);
-		Video v3 = new Video("3. SailsMVC Setup and mLab MongoDB Atlas Sessions","https://www.youtube.com/embed/ma6bDuaxETo","https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/28d11ecb-d204-4855-a8d8-a6bfa7aec2af_medium","10:12",s1);
+		Video v1 = new Video("1. Course Outline","https://www.youtube.com/embed/ma6bDuaxETo","https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/28d11ecb-d204-4855-a8d8-a6bfa7aec2af_medium","33:30",1,s1);
+		Video v2 = new Video("2. Course Preparation and Expectations","https://www.youtube.com/embed/ma6bDuaxETo","https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/28d11ecb-d204-4855-a8d8-a6bfa7aec2af_medium","15:30",2,s1);
+		Video v3 = new Video("3. SailsMVC Setup and mLab MongoDB Atlas Sessions","https://www.youtube.com/embed/ma6bDuaxETo","https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/28d11ecb-d204-4855-a8d8-a6bfa7aec2af_medium","10:12",3,s1);
 		vr.save(v1);
 		vr.save(v2);
 		vr.save(v3);

@@ -28,7 +28,8 @@ public class Section {
 	private Cour cour;
 	
 	
-	@OneToMany(mappedBy = "section",cascade = CascadeType.ALL)   
+	@OneToMany(mappedBy = "section",cascade = CascadeType.ALL) 
+	@OrderBy("ord")
 	private Set<Video> video;
 	
 	

@@ -14,7 +14,10 @@ public class Video {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id_V;
 	
-	
+	@Column(name = "ordre")
+	private int ord;
+
+
 	@Column(name = "description")
 	private String desc;
 	
@@ -62,10 +65,28 @@ public class Video {
 	}
 	
 	
-
+	public Video(String desc,String url,String img,String dure,int ord,Section section) {
+		super();
+		this.desc=desc;
+		this.url=url;
+		this.image=img;
+		this.dure=dure;
+		this.ord=ord;
+		this.section=section;
+	}
 	
 
 	
+
+	
+
+	public int getOrd() {
+		return ord;
+	}
+
+	public void setOrd(int ord) {
+		this.ord = ord;
+	}
 
 	public String getImage() {
 		return image;
@@ -109,6 +130,6 @@ public class Video {
 		this.url = url;
 	}
 
-
+	
 	
 }
