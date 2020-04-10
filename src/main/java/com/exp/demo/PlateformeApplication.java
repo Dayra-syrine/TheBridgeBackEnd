@@ -3,11 +3,13 @@ package com.exp.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.PropertySource;
 
 import com.exp.demo.model.*;
 import com.exp.demo.repo.*;
 
 @SpringBootApplication
+@PropertySource("classpath:application.properties")
 public class PlateformeApplication {
 
 	public static void main(String[] args) {
@@ -19,6 +21,7 @@ public class PlateformeApplication {
 	
 		User u1 = new User("syrinedayra@gmail.com","17Syrine","Dayra","Syrine","user");
 		User u2 = new User("dayrasyrine@gmail.com","17Syrine","Dayra","Syrine","admin");
+		User u3 = new User("tets@gmail.com","test","test","test","user");
 		
 		Cour c1 = new Cour("Fullstack Social iOS NodeJS REST","Swift 5.1, SailsMVC, UIKit","500","c1.png","https://www.youtube.com/embed/ma6bDuaxETo","descV");
 		Cour c2 = new Cour("Maps UIKit SwiftUI","Swift 5.1, MapKit, Google Places","120","c2.png","https://www.youtube.com/embed/ma6bDuaxETo","descV");
@@ -35,6 +38,7 @@ public class PlateformeApplication {
 		cr.save(c6);
 		ur.save(u1);
 		ur.save(u2);
+		ur.save(u3);
 		
 		Section s1 = new Section("Section #1 - Register and Login","s.jpeg",c1);
 		Section s2 = new Section("Section #2 - Preview Oriented Programming with LBTATools","s.jpeg",c1);
