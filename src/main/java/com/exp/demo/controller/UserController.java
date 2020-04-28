@@ -1,10 +1,12 @@
 package com.exp.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,66 +18,109 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.exp.demo.model.RoleEnum;
 import com.exp.demo.model.User;
 import com.exp.demo.repo.UserRepository;
+import com.exp.demo.service.UserService;
 
-
-@CrossOrigin(origins="http://localhost:4200")  
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(path="/users")
+@RequestMapping(path = "/users")
 
 public class UserController {
-	
-	@Autowired
-	 UserRepository ur;
-	
-	 @GetMapping(path="/user", produces = "application/json")
-	    public List<User> getUsers() 
-	    {
-		  
-	        return  ur.findAll();
-	    }
-	 
-	 @GetMapping(path="/users/{id}")
-		public ResponseEntity<Optional<User>> getUserById(@PathVariable(value = "id") Long userId){
-			Optional<User> user = ur.findById(userId);
-			return ResponseEntity.ok().body(user);
-		}
-	 
-	 @PostMapping(value = "/user", consumes = "application/json", produces = "application/json")
-	    public void addUser(@RequestBody User user) {
-	         ur.save(user);
-	    }
-	 
-	 @GetMapping("/user/{mail}")
-		public ResponseEntity<User> getUserByMail(@PathVariable(value = "mail") String userMail){
-			User user = ur.findByMail(userMail);
-			return ResponseEntity.ok().body(user);
-		}
-	 @PutMapping("/user/{id}")
-	  public User updateUser(@PathVariable(value = "id") Long userId,@Valid @RequestBody User userDetails) {
-		User u = ur.findById(userId).get();
-	      u.setMail(userDetails.getMail());
-	      u.setPsw(userDetails.getPsw());
-	      u.setFname(userDetails.getFname());
-	      u.setLname(userDetails.getLname());
-	      User updatedUser = ur.save(u);
-	      return updatedUser;
-	  }
-	 @DeleteMapping("/user/{id}")
-	  public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
-	    try {
-	      ur.deleteById(id);
-	      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	    } catch (Exception e) {
-	      return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-	    }
-	  }
-		
-	
 
-	 
-	 
+	@Autowired
+	private UserRepository ur;
+	@Autowired
+	private UserService userService;
+	
+	List<RoleEnum> roles = new ArrayList<RoleEnum>();
+
+
+	@PostMapping(path = "/signin", produces = "application/json")
+
+	public String login(//
+			@RequestParam String username, //
+			@RequestParam String password) {
+		return "{\"accessToken\":\"" + userService.signin(username, password) + "\"}";
+	}
+
+	@PostMapping(path = "/getMail", produces = "application/json")
+	public ResponseEntity<User> getUserByMail2(@RequestParam String mail) {
+		User user = ur.findByMail(mail);
+		return ResponseEntity.ok().body(user);
+	}
+
+	@PostMapping(value = "/signup", produces = "application/json")
+	public void addUsers(@RequestParam String fname, @RequestParam String lname, @RequestParam String mail,
+			@RequestParam String password) {
+		roles.add(RoleEnum.USER);
+
+		User u = new User();
+		u.setMail(mail);
+		u.setPsw(password);
+		u.setFname(fname);
+		u.setLname(lname);
+		u.setEtat(true);
+		u.setRoles(roles);
+		userService.signup(u);
+	}
+
+	@GetMapping(path = "/user", produces = "application/json")
+	public List<User> getUsers() {
+
+		return ur.findAll();
+	}
+
+	@GetMapping(path = "/users/{id}")
+	public ResponseEntity<Optional<User>> getUserById(@PathVariable(value = "id") Long userId) {
+		Optional<User> user = ur.findById(userId);
+		return ResponseEntity.ok().body(user);
+	}
+
+	@PostMapping(value = "/user", consumes = "application/json", produces = "application/json")
+	public void addUser(@RequestBody User user) {
+		ur.save(user);
+	}
+
+	/*
+	 * @GetMapping("/user/{mail}") public ResponseEntity<User>
+	 * getUserByMail(@PathVariable(value = "mail") String userMail){ User user =
+	 * userService.search(userMail); return ResponseEntity.ok().body(user); }
+	 */
+	@GetMapping("/user/{mail}")
+	public ResponseEntity<User> getUserByMail(@PathVariable(value = "mail") String userMail) {
+		User user = ur.findByMail(userMail);
+		return ResponseEntity.ok().body(user);
+	}
+
+	/*
+	 * @GetMapping("/user/{mail}") public ResponseEntity<User>
+	 * getUserByMail(@PathVariable(value = "mail") String userMail){ User user =
+	 * ur.findByMail(userMail); return ResponseEntity.ok().body(user); }
+	 */
+	@PutMapping("/user/{id}")
+	public User updateUser(@PathVariable(value = "id") Long userId, @Valid @RequestBody User userDetails) {
+		User u = ur.findById(userId).get();
+		u.setMail(userDetails.getMail());
+		u.setPsw(userDetails.getPsw());
+		u.setFname(userDetails.getFname());
+		u.setLname(userDetails.getLname());
+		User updatedUser = ur.save(u);
+		return updatedUser;
+	}
+
+	@DeleteMapping("/user/{id}")
+	public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") long id) {
+		try {
+			ur.deleteById(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+		}
+	}
+
 }

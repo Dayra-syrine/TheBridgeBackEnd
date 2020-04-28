@@ -22,7 +22,7 @@ import com.exp.demo.model.Section;
 import com.exp.demo.model.Video;
 import com.exp.demo.repo.SectionRepository;
 import com.exp.demo.repo.VideoRepository;
-@CrossOrigin(origins="http://localhost:4200")  
+@CrossOrigin(origins="*")  
 @RestController
 @RequestMapping(path="/videos")
 

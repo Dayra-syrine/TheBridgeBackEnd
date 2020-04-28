@@ -23,7 +23,9 @@ import com.exp.demo.model.Cour;
 import com.exp.demo.model.Section;
 import com.exp.demo.repo.CourRepository;
 import com.exp.demo.repo.SectionRepository;
-@CrossOrigin(origins="http://localhost:4200")  
+
+
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path="/sections")
 
