@@ -4,7 +4,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import lombok.var;
 
 @Service
 public class EmailService {
@@ -17,7 +16,7 @@ public class EmailService {
 
     public void sendMail(String toEmail, String subject, String message) {
 
-        var mailMessage = new SimpleMailMessage();
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
 
         mailMessage.setTo(toEmail);
         mailMessage.setSubject(subject);

@@ -4,7 +4,6 @@ package com.exp.demo.service;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
