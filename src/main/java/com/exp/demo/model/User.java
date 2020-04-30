@@ -1,5 +1,7 @@
 package com.exp.demo.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -24,14 +26,17 @@ public class User {
 	private String Lname;
 	
 	@Column(name = "etat")
-	private String etat;
+	private Boolean etat;
 	
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Column(name = "roles")
+	private List<RoleEnum> roles;
 	
-	public String getEtat() {
+	public Boolean getEtat() {
 		return etat;
 	}
 
-	public void setEtat(String etat) {
+	public void setEtat(Boolean etat) {
 		this.etat = etat;
 	}
 
@@ -60,7 +65,7 @@ public class User {
 		this.Lname=lname;
 		
 	}
-	public User(String mail,String psw,String fname,String lname,String etat) {
+	public User(String mail,String psw,String fname,String lname,Boolean etat,List<RoleEnum> roles) {
 
 		super();
 		
@@ -69,6 +74,19 @@ public class User {
 		this.Fname=fname;
 		this.Lname=lname;
 		this.etat=etat;
+		this.roles = roles;
+		
+	}
+	public User(String mail,String psw,String fname,String lname,Boolean etat) {
+
+		super();
+		
+		this.mail=mail;
+		this.psw=psw;
+		this.Fname=fname;
+		this.Lname=lname;
+		this.etat=etat;
+		
 		
 	}
 
@@ -110,6 +128,14 @@ public class User {
 
 	public void setLname(String lname) {
 		Lname = lname;
+	}
+
+	public List<RoleEnum> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<RoleEnum> role) {
+		this.roles = role;
 	}
 	
 	
