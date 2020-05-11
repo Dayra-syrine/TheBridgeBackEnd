@@ -1,0 +1,11 @@
+.marges{
+	margin-top: 100px;
+	margin-bottom: 20px;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+.courante{
+	font-style: bold;
+	color : red;	
+}
