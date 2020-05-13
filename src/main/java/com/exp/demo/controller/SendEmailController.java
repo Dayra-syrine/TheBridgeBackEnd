@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.exp.demo.model.User;
 import com.exp.demo.repo.UserRepository;
+import com.exp.demo.security.JwtTokenProvider;
 import com.exp.demo.service.EmailService;
 
 @CrossOrigin(origins = "*")
@@ -24,11 +25,37 @@ public class SendEmailController {
 	
 	@Autowired
 	private UserRepository ur;
+	
+	@Autowired
+	  private JwtTokenProvider jwtTokenProvider;
 
 	public static PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
 	
-    @PostMapping(value = "/sendmail")
-    public User sendmail(@RequestParam String mail) {
+	
+	  @PostMapping(value = "/sendmail")
+	    public String sendmail(@RequestParam String mail) {
+
+	      String token = jwtTokenProvider.createToken(mail, ur.findByMail(mail).getRoles());
+	      String subject = "TheBridge password reset";
+	      String URL = "http://localhost:4200/restpassword/";
+	      String msg = "Dear user \r\n \r\n For your account a password reset was requested, please click on the URL below to reset it:\r\n \r\n";
+	      String signature ="\r\n \r\n Regards,\r\n" + "TheBridge Team.";
+	        emailService.sendMail(mail, subject, msg+URL+token+signature);
+	        
+	        return "{\"Token\":\"" +token + "\"}";
+	    }
+	  
+	  @PostMapping(value = "/getMail")
+	    public String getMail(@RequestParam String token) {
+
+	        String username = jwtTokenProvider.getUsername(token);
+	        
+	        return "{\"username\":\"" +username + "\"}";
+	    }
+	  
+	
+    @PostMapping(value = "/sendmail1")
+    public User sendmail1(@RequestParam String mail) {
     	
       String newPassword=rendomPassword();
         emailService.sendMail(mail, "TheBridge password reset", " Dear user \r\n For your account a password reset was requested,this is your New Password : "+newPassword+"\r\n Regards,\r\n" + 

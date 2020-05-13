@@ -13,8 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.exp.demo.customexceptions.CustomException;
+import com.exp.demo.model.PasswordResetToken;
 import com.exp.demo.model.User;
 import com.exp.demo.repo.UserRepository;
+import com.exp.demo.repo.passwordTokenRepository;
 import com.exp.demo.security.JwtTokenProvider;
 
 @Service
@@ -22,6 +24,9 @@ public class UserService {
 
   @Autowired
   private UserRepository userRepository;
+  
+  @Autowired
+  private passwordTokenRepository ptr;
 
   @Autowired
   private PasswordEncoder passwordEncoder;
@@ -73,4 +78,9 @@ public class UserService {
     return jwtTokenProvider.createToken(username, userRepository.findByMail(username).getRoles());
   }
 
+  public void createPasswordResetTokenForUser(User user, String token) {
+	    PasswordResetToken myToken = new PasswordResetToken(token, user);
+	    ptr.save(myToken);
+	}
+  
 }

@@ -3,7 +3,9 @@ package com.exp.demo.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.exp.demo.model.GenericResponse;
 import com.exp.demo.model.RoleEnum;
 import com.exp.demo.model.User;
 import com.exp.demo.repo.UserRepository;
@@ -49,6 +52,22 @@ public class UserController {
 			@RequestParam String password) {
 		return "{\"accessToken\":\"" + userService.signin(username, password) + "\"}";
 	}
+	
+//	@PostMapping("/user/resetPassword")
+//	public GenericResponse resetPassword(HttpServletRequest request, 
+//	  @RequestParam("email") String userEmail) {
+//	    User user = ur.findByMail(userEmail);
+//	    if (user == null) {
+//	       // throw new UserNotFoundException();
+//	    }
+//	    String token = UUID.randomUUID().toString();
+//	    userService.createPasswordResetTokenForUser(user, token);
+//	    mailSender.send(constructResetTokenEmail(getAppUrl(request), 
+//	      request.getLocale(), token, user));
+//	    return new GenericResponse(
+//	      messages.getMessage("message.resetPasswordEmail", null, 
+//	      request.getLocale()));
+//	}
 
 	@PostMapping(path = "/getMail", produces = "application/json")
 	public ResponseEntity<User> getUserByMail2(@RequestParam String mail) {
@@ -114,9 +133,16 @@ public class UserController {
 		User updatedUser = ur.save(u);
 		return updatedUser;
 	}
-	@PutMapping("/updatePass")
-	public User updatePsw(@RequestParam Long id_user, @RequestParam String nPass) {
+	@PutMapping("/updatePassID")
+	public User updatePswId(@RequestParam Long id_user, @RequestParam String nPass) {
 		User u = ur.findById(id_user).get();
+		u.setPsw( passwordEncoder.encode(nPass));
+		User updatedPsw = ur.save(u);
+		return updatedPsw;
+	}
+	@PutMapping("/updatePass")
+	public User updatePsw(@RequestParam String mail, @RequestParam String nPass) {
+		User u = ur.findByMail(mail);
 		u.setPsw( passwordEncoder.encode(nPass));
 		User updatedPsw = ur.save(u);
 		return updatedPsw;
