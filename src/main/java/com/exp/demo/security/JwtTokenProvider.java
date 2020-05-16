@@ -21,7 +21,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.exp.demo.customexceptions.CustomException;
+import com.exp.demo.model.PasswordResetToken;
 import com.exp.demo.model.RoleEnum;
+import com.exp.demo.model.User;
+import com.exp.demo.repo.PasswordTokenRepository;
+import com.exp.demo.repo.UserRepository;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -30,6 +34,13 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JwtTokenProvider {
+	
+	
+	@Autowired
+	private UserRepository ur;
+	
+	@Autowired
+	private PasswordTokenRepository ptr;
 
   /**
    * THIS IS NOT A SECURE PRACTICE! For simplicity, we are storing a static key here. Ideally, in a
@@ -40,6 +51,9 @@ public class JwtTokenProvider {
 
   @Value("${security.jwt.token.expire-length:3600000}")
   private long validityInMilliseconds = 3600000; // 1h
+  
+  @Value("${security.jwt.tokenPSW.expire-length:10000}")
+  private long validityInMilliseconds2 = 10000; // 1h
 
   @Autowired
   private MyUserDetails myUserDetails;
@@ -64,6 +78,21 @@ public class JwtTokenProvider {
         .signWith(SignatureAlgorithm.HS256, secretKey)//
         .compact();
   }
+  public String createPSWToken(String username, List<RoleEnum> roles) {
+
+	    Claims claims = Jwts.claims().setSubject(username);
+	    claims.put("auth", roles.stream().map(s -> new SimpleGrantedAuthority(s.name())).filter(Objects::nonNull).collect(Collectors.toList()));
+
+	    Date now = new Date();
+	    Date validity = new Date(now.getTime() + validityInMilliseconds2);
+
+	    return Jwts.builder()//
+	        .setClaims(claims)//
+	        .setIssuedAt(now)//
+	        .setExpiration(validity)//
+	        .signWith(SignatureAlgorithm.HS256, secretKey)//
+	        .compact();
+	  }
 
   public Authentication getAuthentication(String token) {
     UserDetails userDetails = myUserDetails.loadUserByUsername(getUsername(token));
@@ -87,8 +116,21 @@ public class JwtTokenProvider {
       Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
       return true;
     } catch (JwtException | IllegalArgumentException e) {
+    	
       throw new CustomException("Expired or invalid JWT token", HttpStatus.INTERNAL_SERVER_ERROR);
+      
     }
   }
+  
+  public boolean validatePSWToken(String token) {
+	    try {
+	      Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+	      return true;
+	    } catch (JwtException | IllegalArgumentException e) {
+	    	
+	       return false;
+	      
+	    }
+	  }
 
 }

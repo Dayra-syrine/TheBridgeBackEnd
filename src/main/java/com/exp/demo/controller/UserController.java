@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.exp.demo.model.GenericResponse;
+import com.exp.demo.model.PasswordResetToken;
 import com.exp.demo.model.RoleEnum;
 import com.exp.demo.model.User;
+import com.exp.demo.repo.PasswordTokenRepository;
 import com.exp.demo.repo.UserRepository;
 import com.exp.demo.service.UserService;
 
@@ -38,8 +40,12 @@ public class UserController {
 
 	@Autowired
 	private UserRepository ur;
+	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private PasswordTokenRepository ptr;
 	
 	List<RoleEnum> roles = new ArrayList<RoleEnum>();
 
@@ -145,7 +151,13 @@ public class UserController {
 		User u = ur.findByMail(mail);
 		u.setPsw( passwordEncoder.encode(nPass));
 		User updatedPsw = ur.save(u);
+		
+		PasswordResetToken PRToken = ptr.findByUser(u);
+		PRToken.setValidity("false");
+		ptr.save(PRToken);
+		
 		return updatedPsw;
+		
 	}
 
 	@DeleteMapping("/user/{id}")
