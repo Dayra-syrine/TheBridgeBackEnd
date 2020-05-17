@@ -3,6 +3,7 @@ package com.exp.demo.controller;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,6 +35,9 @@ public class SendEmailController {
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
 
+	@Value("${SERVER_HOST}")
+	private String SERVER_HOST;
+
 	public static PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
 
 	@PostMapping(value = "/sendmail")
@@ -41,7 +45,7 @@ public class SendEmailController {
 
 		String token = jwtTokenProvider.createPSWToken(mail, ur.findByMail(mail).getRoles());
 		String subject = "TheBridge password reset";
-		String URL = "http://localhost:4200/restpassword/";
+		String URL = SERVER_HOST+"/restpassword/";
 		String msg = "Dear user \r\n \r\n For your account a password reset was requested, please click on the URL below to reset it:\r\n \r\n";
 		String signature = "\r\n \r\n Regards,\r\n" + "TheBridge Team.";
 		emailService.sendMail(mail, subject, msg + URL + token + signature);

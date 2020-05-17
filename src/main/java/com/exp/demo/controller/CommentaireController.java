@@ -21,7 +21,7 @@ import com.exp.demo.repo.CommentaireRepository;
 import com.exp.demo.repo.VideoRepository;
 
 
-//@CrossOrigin(origins = "http://localhost:4200")
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path="/commentaires")
