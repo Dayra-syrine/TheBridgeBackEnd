@@ -28,6 +28,9 @@ public class User {
 	@Column(name = "etat")
 	private Boolean etat;
 	
+	@Column(name = "image")
+	private String image;
+	
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Column(name = "roles")
 	private List<RoleEnum> roles;
@@ -89,6 +92,20 @@ public class User {
 		
 		
 	}
+	
+	public User(String mail,String psw,String fname,String lname,String image,Boolean etat,List<RoleEnum> roles) {
+
+		super();
+		
+		this.mail=mail;
+		this.psw=psw;
+		this.Fname=fname;
+		this.Lname=lname;
+		this.image=image;
+		this.etat=etat;
+		this.roles = roles;
+		
+	}
 
 	public long getId_U() {
 		return id_U;
@@ -112,6 +129,16 @@ public class User {
 
 	public void setPsw(String psw) {
 		this.psw = psw;
+	}
+	
+	
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public String getFname() {

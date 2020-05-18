@@ -80,7 +80,7 @@ public class UserController {
 
 	@PostMapping(value = "/signup", produces = "application/json")
 	public void addUsers(@RequestParam String fname, @RequestParam String lname, @RequestParam String mail,
-			@RequestParam String password) {
+			@RequestParam String password , @RequestParam String image ) {
 		roles.add(RoleEnum.USER);
 
 		User u = new User();
@@ -88,6 +88,7 @@ public class UserController {
 		u.setPsw(password);
 		u.setFname(fname);
 		u.setLname(lname);
+		u.setImage(image);
 		u.setEtat(true);
 		u.setRoles(roles);
 		userService.signup(u);
