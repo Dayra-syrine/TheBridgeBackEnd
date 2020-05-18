@@ -1,12 +1,18 @@
 package com.exp.demo.model;
 
-import javax.persistence.*;
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "registration")
 @IdClass(RegistrationPK.class)
-public class Registration {
-	
+public class Registration implements Serializable {
 	@Id
     @ManyToOne
     @JoinColumn(name = "id_U")
@@ -34,5 +40,6 @@ public class Registration {
 	public void setCours(Cour cours) {
 		this.cours = cours;
 	}
+    
 
 }
