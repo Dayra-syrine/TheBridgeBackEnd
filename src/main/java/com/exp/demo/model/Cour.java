@@ -1,8 +1,11 @@
 package com.exp.demo.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -33,8 +36,30 @@ public class Cour {
 	@Column(name = "descV")
 	private String descV;
 	
+	@Column(name = "isncription_date")
+	private String isncription_date;
+	
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+    private List<Registration> registration ;
 	
 	
+	public String getIsncription_date() {
+		return isncription_date;
+	}
+
+	public void setIsncription_date(String isncription_date) {
+		this.isncription_date = isncription_date;
+	}
+
+	public List<Registration> getRegistration() {
+		return registration;
+	}
+
+	public void setRegistration(List<Registration> registration) {
+		this.registration = registration;
+	}
+
 	@OneToMany(mappedBy = "cour",cascade = CascadeType.ALL)   
 	private Set<Section> lsection;
 	
