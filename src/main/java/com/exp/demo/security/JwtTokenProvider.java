@@ -21,11 +21,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.exp.demo.customexceptions.CustomException;
-import com.exp.demo.model.PasswordResetToken;
 import com.exp.demo.model.RoleEnum;
-import com.exp.demo.model.User;
-import com.exp.demo.repo.PasswordTokenRepository;
-import com.exp.demo.repo.UserRepository;
+
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -36,11 +33,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtTokenProvider {
 	
 	
-	@Autowired
-	private UserRepository ur;
-	
-	@Autowired
-	private PasswordTokenRepository ptr;
 
   /**
    * THIS IS NOT A SECURE PRACTICE! For simplicity, we are storing a static key here. Ideally, in a
