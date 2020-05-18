@@ -60,8 +60,6 @@ public class SendEmailController {
 	@PostMapping(value = "/getValidity")
 	public String getValidity(@RequestParam String token) {
 
-		String mail = jwtTokenProvider.getUsername(token);
-		User u = ur.findByMail(mail);
 
 		PasswordResetToken PRToken = ptr.findByToken(token);
 
@@ -73,8 +71,6 @@ public class SendEmailController {
 	@PostMapping(value = "/getTimeOut")
 	public Boolean getTimeOut(@RequestParam String token) {
 
-		String mail = jwtTokenProvider.getUsername(token);
-		User u = ur.findByMail(mail);
 		
 		Boolean val = jwtTokenProvider.validatePSWToken(token);
 
