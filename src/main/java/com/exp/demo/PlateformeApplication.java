@@ -42,6 +42,8 @@ public class PlateformeApplication {
 		User u2 = new User("dayrasyrine@gmail.com", passwordEncoder.encode("17Syrine"), "Dayra", "Syrine", true, roles1);
 	
 		User u3 = new User("maryemwaddani@gmail.com", passwordEncoder.encode("123456789"), "maryem", "waddani", true, roles);
+		
+		User u4 = new User("nsirinawres@gmail.com", passwordEncoder.encode("nawresnsiri"), "nawres", "nsiri","c1.png",true, roles);
 
 		Cour c1 = new Cour("Fullstack Social iOS NodeJS REST", "Swift 5.1, SailsMVC, UIKit", "500", "c1.png",
 				"https://www.youtube.com/embed/ma6bDuaxETo", "descV");
@@ -65,6 +67,7 @@ public class PlateformeApplication {
 		ur.save(u1);
 		ur.save(u2);
 		ur.save(u3);
+		ur.save(u4);
 
 		Section s1 = new Section("Section #1 - Register and Login", "s.jpeg", c1);
 		Section s2 = new Section("Section #2 - Preview Oriented Programming with LBTATools", "s.jpeg", c1);
