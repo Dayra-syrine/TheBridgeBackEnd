@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/commentaires/**").permitAll()
 				.antMatchers("/sendmail/**").permitAll()
 				.antMatchers("/registration/**").permitAll()
-				.antMatchers("/h2-console/**/**").permitAll()
+				.antMatchers("/savefile/**").permitAll()
 				.anyRequest().authenticated();
 
 		// If a user try to access a resource without having enough permissions
