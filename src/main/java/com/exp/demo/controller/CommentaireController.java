@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.exp.demo.model.Commentaire;
+import com.exp.demo.model.User;
 import com.exp.demo.model.Video;
 import com.exp.demo.repo.CommentaireRepository;
+import com.exp.demo.repo.UserRepository;
 import com.exp.demo.repo.VideoRepository;
 
 
@@ -31,6 +34,9 @@ public class CommentaireController {
 
 	@Autowired
 	VideoRepository vr;
+	
+	@Autowired
+	private UserRepository ur;
 	
 	@GetMapping(path="/commentaire", produces = "application/json")
     public List<Commentaire> getListCommentaire() 
@@ -58,11 +64,18 @@ public class CommentaireController {
 	}
 		
 	
-	 @PostMapping(value = "/commentaire/{id_v}", consumes = "application/json", produces = "application/json")
-	    public void addCommentaire(@PathVariable Long id_v, @Valid @RequestBody Commentaire commentaire) {
+	 @PostMapping(value = "/commentaire", produces = "application/json")
+	    public Commentaire addCommentaire(@RequestParam Long id_v, @RequestParam String desc , @RequestParam Long idU) {
 		 Optional<Video> v = vr.findById(id_v);	
-		 commentaire.setVideo(v.get());
-	         cr.save(commentaire);
+		 Optional<User> u = ur.findById(idU);
+		
+		 Commentaire com = new Commentaire();
+		 com.setVideo(v.get());
+		 com.setUser(u.get());
+		 com.setDesccom(desc);
+		 
+	         cr.save(com);
+	         return com;
 	    }
 	
 }

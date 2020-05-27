@@ -25,10 +25,7 @@ public class Commentaire {
 	
 	@Column(name = "desccom")
 	private String desccom;
-	
-	@Column(name = "user")
-	private String user;
-	
+		
 	@ManyToOne          
 	@JsonIgnore
 	@JoinColumn(name="id_video")
@@ -37,18 +34,23 @@ public class Commentaire {
 	@OneToMany(mappedBy = "commentaire",cascade = CascadeType.ALL)   
 	private Set<Reply> Reply;
 	
-	public Commentaire(long id_Com, String desccom, String user,Video v) {
+	@ManyToOne          
+	@JsonIgnore
+	@JoinColumn(name="id_user")
+	private User User;
+	
+	public Commentaire(long id_Com, String desccom, User user,Video v) {
 		super();
 		this.id_Com = id_Com;
 		this.desccom = desccom;
-		this.user = user;
+		this.User = user;
 		this.video=v;
 	}
 
-	public Commentaire(String desccom, String user,Video v) {
+	public Commentaire(String desccom, User user,Video v) {
 		super();
 		this.desccom = desccom;
-		this.user = user;
+		this.User = user;
 		this.video=v;
 
 	}
@@ -88,12 +90,8 @@ public class Commentaire {
 		this.video = video;
 	}
 
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
+	public User getUser() {
+		return User;
 	}
 
 	public Set<Reply> getReply() {
@@ -102,6 +100,10 @@ public class Commentaire {
 
 	public void setReply(Set<Reply> reply) {
 		Reply = reply;
+	}
+
+	public void setUser(User user) {
+		User = user;
 	}
 
 	

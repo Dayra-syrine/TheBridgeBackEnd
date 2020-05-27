@@ -32,15 +32,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// Entry points
 		http.authorizeRequests()
-				.antMatchers("/users/**").permitAll()
+				.antMatchers("/users/signin").permitAll()
+				.antMatchers("/users/signup").permitAll()
+				.antMatchers("/users/getMail").permitAll()
+				//.antMatchers("/users/users").permitAll()
 				.antMatchers("/cours/**").permitAll()
 				.antMatchers("/sections/**").permitAll()
 				.antMatchers("/videos/**").permitAll()
 				.antMatchers("/replys/**").permitAll()
 				.antMatchers("/commentaires/**").permitAll()
-				.antMatchers("/sendmail/**").permitAll()
-				.antMatchers("/registration/**").permitAll()
-				.antMatchers("/savefile/**").permitAll()
+			//	.antMatchers("/sendmail/**").permitAll()
+			//	.antMatchers("/registration/**").permitAll()
+			//  .antMatchers("/savefile/**").permitAll()
 				.anyRequest().authenticated();
 
 		// If a user try to access a resource without having enough permissions

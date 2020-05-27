@@ -82,12 +82,23 @@ public class CourController {
 		cour.setTitre(courDetails.getTitre());
 		cour.setDescription(courDetails.getDescription());
 		cour.setPrix(courDetails.getPrix());
-		cour.setImage(courDetails.getImage());
+	//	cour.setImage(courDetails.getImage());
 		cour.setVideo(courDetails.getVideo());
 		cour.setDescV(courDetails.getDescV());
 
 		Cour updatedCour = cr.save(cour);
 		return updatedCour;
+	}
+	
+	@PutMapping("/cour/courImage/{id}")
+	public Cour updateImage(@PathVariable(value = "id") Long courId, @Valid @RequestBody String image) {
+
+		Cour cour = cr.findById(courId).get();
+		
+		cour.setImage(image);
+
+		Cour updatedImage = cr.save(cour);
+		return updatedImage;
 	}
 
 }

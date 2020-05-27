@@ -93,11 +93,24 @@ public class SectionController {
 
 		Section s = sr.findById(sectionId).get();
 
-		s.setImage(sectionDetails.getImage());
+	//	s.setImage(sectionDetails.getImage());
 		s.setTitre(sectionDetails.getTitre());
 
 		Section updatedSection = sr.save(s);
 		return updatedSection;
+	}
+	
+	@PutMapping("/sectionImage/{id}")
+	public Section updateImage(@PathVariable(value = "id") Long sectionId,
+			@Valid @RequestBody String image) {
+
+		Section s = sr.findById(sectionId).get();
+
+		s.setImage(image);
+
+
+		Section updatedImage = sr.save(s);
+		return updatedImage;
 	}
 
 	@DeleteMapping("/section/{id}")

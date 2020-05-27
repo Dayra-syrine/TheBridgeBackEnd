@@ -20,8 +20,10 @@ public class Reply {
 	@Column(name = "desccom")
 	private String desccom;
 	
-	@Column(name = "user")
-	private String user;
+	@ManyToOne          
+	@JsonIgnore
+	@JoinColumn(name="id_user")
+	private User User;
 	
 	@ManyToOne          
 	@JsonIgnore
@@ -33,19 +35,19 @@ public class Reply {
 		super();
 	}
 
-	public Reply( String desccom, String user, Commentaire commentaire) {
+	public Reply( String desccom, User user, Commentaire commentaire) {
 		super();
 		this.desccom = desccom;
-		this.user = user;
+		this.User = user;
 		this.commentaire = commentaire;
 	}
 	
 
-	public Reply(long id_Reply, String desccom, String user) {
+	public Reply(long id_Reply, String desccom, User user) {
 		super();
 		this.id_Reply = id_Reply;
 		this.desccom = desccom;
-		this.user = user;
+		this.User = user;
 	}
 	
 
@@ -71,13 +73,7 @@ public class Reply {
 		this.desccom = desccom;
 	}
 
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
+	
 
 	public Commentaire getCommentaire() {
 		return commentaire;
@@ -85,6 +81,14 @@ public class Reply {
 
 	public void setCommentaire(Commentaire commentaire) {
 		this.commentaire = commentaire;
+	}
+
+	public User getUser() {
+		return User;
+	}
+
+	public void setUser(User user) {
+		User = user;
 	}
 	
 	

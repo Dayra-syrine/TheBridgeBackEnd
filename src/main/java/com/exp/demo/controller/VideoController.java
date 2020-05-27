@@ -71,7 +71,7 @@ public class VideoController {
 
 		Video v = vr.findById(videoId).get();
 
-	      v.setImage(videoDetails.getImage());
+	  //  v.setImage(videoDetails.getImage());
 	      v.setDesc(videoDetails.getDesc());
 	      v.setDure(videoDetails.getDure());
 	      v.setUrl(videoDetails.getUrl());
@@ -80,6 +80,21 @@ public class VideoController {
 	      Video updatedVideo = vr.save(v);
 	      return updatedVideo;
 	  }
+	
+	
+	@PutMapping("/video/videoImage/{id}")
+	  public Video updateImage(@PathVariable(value = "id") Long videoId,
+	                                          @Valid @RequestBody String image) {
+
+		Video v = vr.findById(videoId).get();
+
+	      v.setImage(image);
+	      
+	      Video updatedImage = vr.save(v);
+	      return updatedImage;
+	  }
+	
+	
 	@PostMapping("/video/{id_section}")
 	public Video createVideo(@PathVariable Long id_section, @Valid @RequestBody Video video) {
 	System.out.println(id_section);

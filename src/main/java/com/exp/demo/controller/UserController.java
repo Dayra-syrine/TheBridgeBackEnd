@@ -56,6 +56,26 @@ public class UserController {
 		return "{\"accessToken\":\"" + userService.signin(username, password) + "\"}";
 	}
 	
+	
+	
+	@PostMapping(value = "/signup", produces = "application/json")
+	public void addUsers(@RequestParam String fname, @RequestParam String lname, @RequestParam String mail,
+			@RequestParam String password) {
+		roles.add(RoleEnum.USER);
+
+		User u = new User();
+		u.setMail(mail);
+		u.setPsw(password);
+		u.setFname(fname);
+		u.setLname(lname);
+		u.setEtat(true);
+		u.setRoles(roles);
+		userService.signup(u);
+	}
+	
+	
+	
+	
 //	@PostMapping("/user/resetPassword")
 //	public GenericResponse resetPassword(HttpServletRequest request, 
 //	  @RequestParam("email") String userEmail) {
@@ -78,21 +98,21 @@ public class UserController {
 		return ResponseEntity.ok().body(user);
 	}
 
-	@PostMapping(value = "/signup", produces = "application/json")
-	public void addUsers(@RequestParam String fname, @RequestParam String lname, @RequestParam String mail,
-			@RequestParam String password , @RequestParam String image ) {
-		roles.add(RoleEnum.USER);
-
-		User u = new User();
-		u.setMail(mail);
-		u.setPsw(password);
-		u.setFname(fname);
-		u.setLname(lname);
-		u.setImage(image);
-		u.setEtat(true);
-		u.setRoles(roles);
-		userService.signup(u);
-	}
+//	@PostMapping(value = "/signup", produces = "application/json")
+//	public void addUsers(@RequestParam String fname, @RequestParam String lname, @RequestParam String mail,
+//			@RequestParam String password , @RequestParam String image ) {
+//		roles.add(RoleEnum.USER);
+//
+//		User u = new User();
+//		u.setMail(mail);
+//		u.setPsw(password);
+//		u.setFname(fname);
+//		u.setLname(lname);
+//		u.setImage(image);
+//		u.setEtat(true);
+//		u.setRoles(roles);
+//		userService.signup(u);
+//	}
 
 	@GetMapping(path = "/user", produces = "application/json")
 	public List<User> getUsers() {
@@ -137,6 +157,15 @@ public class UserController {
 		User updatedUser = ur.save(u);
 		return updatedUser;
 	}
+	
+	@PutMapping("/addPicture")
+	public User addPicture(@RequestParam Long userId,@RequestParam String image) {
+		User u = ur.findById(userId).get();
+		u.setImage(image);
+		User updatedUser = ur.save(u);
+		return updatedUser;
+	}
+	
 	@PutMapping("/updatePassID")
 	public User updatePswId(@RequestParam Long id_user, @RequestParam String nPass) {
 		User u = ur.findById(id_user).get();

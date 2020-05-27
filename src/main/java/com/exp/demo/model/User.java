@@ -1,6 +1,7 @@
 package com.exp.demo.model;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -35,16 +36,16 @@ public class User {
 	@Column(name = "roles")
 	private List<RoleEnum> roles;
 	
-	public Boolean getEtat() {
-		return etat;
-	}
-
-	public void setEtat(Boolean etat) {
-		this.etat = etat;
-	}
-
-	public User() {
+	
+	
+		public User() {
 		super();
+	}
+	public User(String mail) {
+
+		super();
+		
+		this.mail=mail;	
 	}
 	
 	public User(Long id,String mail,String psw,String fname,String lname) {
@@ -80,6 +81,19 @@ public class User {
 		this.roles = roles;
 		
 	}
+	
+	public User(String mail,String fname,String lname,Boolean etat,List<RoleEnum> roles) {
+
+		super();
+		
+		this.mail=mail;
+		this.Fname=fname;
+		this.Lname=lname;
+		this.etat=etat;
+		this.roles = roles;
+		
+	}
+	
 	public User(String mail,String psw,String fname,String lname,Boolean etat) {
 
 		super();
@@ -164,7 +178,17 @@ public class User {
 	public void setRoles(List<RoleEnum> role) {
 		this.roles = role;
 	}
+
+	public Boolean getEtat() {
+		return etat;
+	}
+
+	public void setEtat(Boolean etat) {
+		this.etat = etat;
+	}
 	
+
+
 	
 
 }
