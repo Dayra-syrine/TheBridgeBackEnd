@@ -36,6 +36,9 @@ public class Cour {
 	@Column(name = "descV")
 	private String descV;
 	
+	@Column(name = "courslink")
+	private String courslink;
+	
 	@Column(name = "isncription_date")
 	private String isncription_date;
 	
@@ -44,33 +47,13 @@ public class Cour {
     private List<Registration> registration ;
 	
 	
-	public String getIsncription_date() {
-		return isncription_date;
-	}
-
-	public void setIsncription_date(String isncription_date) {
-		this.isncription_date = isncription_date;
-	}
-
-	public List<Registration> getRegistration() {
-		return registration;
-	}
-
-	public void setRegistration(List<Registration> registration) {
-		this.registration = registration;
-	}
+	
 
 	@OneToMany(mappedBy = "cour",cascade = CascadeType.ALL)   
 	private Set<Section> lsection;
 	
 	
-	public Set<Section> getLsection() {
-		return lsection;
-	}
-
-	public void setLsection(Set<Section> lsection) {
-		this.lsection = lsection;
-	}
+	
 
 	public Cour()
 	{
@@ -78,7 +61,8 @@ public class Cour {
 	}
 	
 
-	public Cour(long id_C, String titre, String description, String prix, String image, String video, String descV,
+	
+	public Cour(long id_C,String link, String titre, String description, String prix, String image, String video, String descV,
 			Set<Section> lsection) {
 		super();
 		this.id_C = id_C;
@@ -89,6 +73,30 @@ public class Cour {
 		this.video = video;
 		this.descV = descV;
 		this.lsection = lsection;
+		this.courslink=link;
+	}
+	
+	public Cour(String link, String titre, String description, String prix, String video, String descV,
+			Set<Section> lsection) {
+		super();
+	
+		this.titre = titre;
+		this.description = description;
+		this.prix = prix;
+		this.video = video;
+		this.descV = descV;
+		this.lsection = lsection;
+		this.courslink=link;
+	}
+	public Cour(String link,String titre, String description, String prix, String image, String video, String descV) {
+		super();
+		this.titre = titre;
+		this.description = description;
+		this.prix = prix;
+		this.image = image;
+		this.video = video;
+		this.descV = descV;
+		this.courslink=link;
 	}
 
 	public Cour(String titre, String description, String prix, String image, String video, String descV) {
@@ -140,6 +148,14 @@ public class Cour {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	
+	public Set<Section> getLsection() {
+		return lsection;
+	}
+
+	public void setLsection(Set<Section> lsection) {
+		this.lsection = lsection;
+	}
 
 	public String getVideo() {
 		return video;
@@ -155,6 +171,31 @@ public class Cour {
 
 	public void setDescV(String descV) {
 		this.descV = descV;
+	}
+
+	public String getCoursLink() {
+		return courslink;
+	}
+
+	public void setCoursLink(String coursLink) {
+		this.courslink = coursLink;
+	}
+	
+	
+	public String getIsncription_date() {
+		return isncription_date;
+	}
+
+	public void setIsncription_date(String isncription_date) {
+		this.isncription_date = isncription_date;
+	}
+
+	public List<Registration> getRegistration() {
+		return registration;
+	}
+
+	public void setRegistration(List<Registration> registration) {
+		this.registration = registration;
 	}
 	
 	

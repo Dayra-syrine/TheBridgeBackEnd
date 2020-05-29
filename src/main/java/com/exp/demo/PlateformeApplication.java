@@ -45,7 +45,7 @@ public class PlateformeApplication {
 		
 		User u4 = new User("nsirinawres@gmail.com", passwordEncoder.encode("nawresnsiri"), "nawres", "nsiri","c1.png",true, roles);
 
-		Cour c1 = new Cour("Fullstack Social iOS NodeJS REST", "Swift 5.1, SailsMVC, UIKit", "500", "c1.png",
+		Cour c1 = new Cour("test","Fullstack Social iOS NodeJS REST", "Swift 5.1, SailsMVC, UIKit", "500", "c1.png",
 				"https://www.youtube.com/embed/ma6bDuaxETo", "descV");
 		Cour c2 = new Cour("Maps UIKit SwiftUI", "Swift 5.1, MapKit, Google Places", "120", "c2.png",
 				"https://www.youtube.com/embed/ma6bDuaxETo", "descV");

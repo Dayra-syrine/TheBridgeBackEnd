@@ -6,48 +6,50 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
-@Table(name="videos")
+@Table(name = "videos")
 
 public class Video {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id_V;
-	
+
 	@Column(name = "ordre")
 	private int ord;
 
+	@Column(name = "videolink")
+	private String videolink;
 
 	@Column(name = "description")
 	private String desc;
-	
+
 	@Column(name = "image")
 	private String image;
-	
+
 	@Column(name = "duré")
 	private String dure;
 
 	@Column(name = "url")
 	private String url;
-	
-	@ManyToOne          
+
+	@ManyToOne
 	@JsonIgnore
-	@JoinColumn(name="id_section")
+	@JoinColumn(name = "id_section")
 	private Section section;
-	
+
 	public Video() {
 		super();
 	}
-	
-	public Video(String desc,String url,String img,String dure,Section section) {
+
+	public Video(String desc, String url, String img, String dure, Section section) {
 		super();
-		this.desc=desc;
-		this.url=url;
-		this.image=img;
-		this.dure=dure;
-		this.section=section;
+		this.desc = desc;
+		this.url = url;
+		this.image = img;
+		this.dure = dure;
+		this.section = section;
 	}
-	
+
 	public Section getSection() {
 		return section;
 	}
@@ -56,29 +58,41 @@ public class Video {
 		this.section = section;
 	}
 
-	public Video(String desc,String url,String img,String dure) {
+	public Video(String desc, String url, String img, String dure) {
 		super();
-		this.desc=desc;
-		this.url=url;
-		this.image=img;
-		this.dure=dure;
+		this.desc = desc;
+		this.url = url;
+		this.image = img;
+		this.dure = dure;
 	}
-	
-	
-	public Video(String desc,String url,String img,String dure,int ord,Section section) {
+	public Video(String desc, String url, String img, String dure,String videolink) {
 		super();
-		this.desc=desc;
-		this.url=url;
-		this.image=img;
-		this.dure=dure;
-		this.ord=ord;
-		this.section=section;
+		this.desc = desc;
+		this.url = url;
+		this.image = img;
+		this.dure = dure;
+		this.videolink=videolink;
 	}
-	
 
-	
-
-	
+	public Video(String desc, String url, String img, String dure, int ord, Section section) {
+		super();
+		this.desc = desc;
+		this.url = url;
+		this.image = img;
+		this.dure = dure;
+		this.ord = ord;
+		this.section = section;
+	}
+	public Video(String desc, String url, String img, String dure, int ord, Section section,String videolink) {
+		super();
+		this.desc = desc;
+		this.url = url;
+		this.image = img;
+		this.dure = dure;
+		this.ord = ord;
+		this.section = section;
+		this.videolink=videolink;
+	}
 
 	public int getOrd() {
 		return ord;
@@ -104,8 +118,6 @@ public class Video {
 		this.dure = dure;
 	}
 
-	
-
 	public long getId_V() {
 		return id_V;
 	}
@@ -130,6 +142,12 @@ public class Video {
 		this.url = url;
 	}
 
-	
-	
+	public String getVideoLink() {
+		return videolink;
+	}
+
+	public void setVideoLink(String videoLink) {
+		this.videolink = videoLink;
+	}
+
 }

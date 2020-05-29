@@ -43,17 +43,6 @@ public class VideoController {
 		return vr.findById(videoId);
 	}
 	
-	 /* @GetMapping("/video/{id}")
-	public List<Video> getVideoById(@PathVariable(value = "id") Long videoId){
-		Video video = vr.findById(videoId);
-		List<Video> videoSection=new ArrayList<Video>();
-		for(int i=0;i<video.size();i++) {
-			if(video.get(i).getSection().getId_S()==sectionId) {
-				videoSection.add(video.get(i));
-			}
-		}
-		return videoSection;
-	}  */
 	
 	
 	@DeleteMapping("/video/{id}")
@@ -66,17 +55,13 @@ public class VideoController {
 	    }
 	  }
 	@PutMapping("/video/{id}")
-	  public Video updateVideo(@PathVariable(value = "id") Long videoId,
-	                                          @Valid @RequestBody Video videoDetails) {
+	  public Video updateVideo(@PathVariable(value = "id") Long videoId,@Valid @RequestBody Video videoDetails) {
 
 		Video v = vr.findById(videoId).get();
-
-	  //  v.setImage(videoDetails.getImage());
 	      v.setDesc(videoDetails.getDesc());
 	      v.setDure(videoDetails.getDure());
 	      v.setUrl(videoDetails.getUrl());
-
-
+	      v.setVideoLink(videoDetails.getVideoLink());
 	      Video updatedVideo = vr.save(v);
 	      return updatedVideo;
 	  }
