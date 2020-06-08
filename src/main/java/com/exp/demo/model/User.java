@@ -12,10 +12,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id_U;
 	
-	@Column(name = "mail",unique = true)
+	@Column(name = "mail",unique = true,nullable= false)
 	private String mail;
 	
-	@Column(name = "psw")
+	@Column(name = "psw",nullable= false)
 	private String psw;
 
 	@Column(name = "Fname")
