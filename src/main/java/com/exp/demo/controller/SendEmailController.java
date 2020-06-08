@@ -56,6 +56,10 @@ public class SendEmailController {
 
 		return "{\"Token\":\"" + token + "\"}";
 	}
+	@PostMapping(value = "/sendCoachmail")
+	public void sendCoachmail(@RequestParam String mail,@RequestParam String desc,@RequestParam String name) {
+		emailService.sendMail(mail, "TheBridge Administration","Dear "+name+"  Thank you for your Coaching request "+desc);
+}
 
 	@PostMapping(value = "/getValidity")
 	public String getValidity(@RequestParam String token) {
