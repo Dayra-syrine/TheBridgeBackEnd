@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/sections/**").permitAll()
 				.antMatchers("/videos/**").permitAll()
 				.antMatchers("/replys/**").permitAll()
-				.antMatchers("/commentaires/**").permitAll()
+				.antMatchers("/commentaires/getCommentaire").permitAll()
 			//	.antMatchers("/sendmail/**").permitAll()
 			//	.antMatchers("/registration/**").permitAll()
 			    .antMatchers("/savefile/**").permitAll()
