@@ -45,7 +45,7 @@ public class PlateformeApplication {
 		
 		User u4 = new User("nsirinawres@gmail.com", passwordEncoder.encode("nawresnsiri"), "nawres", "nsiri","c1.png",true, roles);
 
-		Cour c1 = new Cour("test","Fullstack Social iOS NodeJS REST", "Swift 5.1, SailsMVC, UIKit", "500", "c1.png",
+		Cour c1 = new Cour("https://github.com/Dayra-syrine/TheBridgeFrontEnd","Fullstack Social iOS NodeJS REST", "Swift 5.1, SailsMVC, UIKit", "500", "c1.png",
 				"https://www.youtube.com/embed/ma6bDuaxETo", "descV");
 		Cour c2 = new Cour("Maps UIKit SwiftUI", "Swift 5.1, MapKit, Google Places", "120", "c2.png",
 				"https://www.youtube.com/embed/ma6bDuaxETo", "descV");
@@ -83,16 +83,16 @@ public class PlateformeApplication {
 		sr.save(s5);
 		sr.save(s6);
 
-		Video v1 = new Video("Course Outline", "https://www.youtube.com/embed/ma6bDuaxETo", "v1.PNG", "33:30", 1, s1);
+		Video v1 = new Video("Course Outline", "https://www.youtube.com/embed/ma6bDuaxETo", "v1.PNG", "33:30", 1, s1,true);
 		Video v2 = new Video("Course Preparation and Expectations", "https://www.youtube.com/embed/ma6bDuaxETo",
-				"v2.PNG", "15:30", 2, s1);
+				"v2.PNG", "15:30", 2, s1,false);
 		Video v3 = new Video("SailsMVC Setup and mLab MongoDB Atlas Sessions",
-				"https://www.youtube.com/embed/ma6bDuaxETo", "v3.PNG", "10:12", 3, s1);
-		Video v4 = new Video("Course Outline", "https://www.youtube.com/embed/ma6bDuaxETo", "v1.PNG", "33:30", 1, s2);
+				"https://www.youtube.com/embed/ma6bDuaxETo", "v3.PNG", "10:12", 3, s1,true);
+		Video v4 = new Video("Course Outline", "https://www.youtube.com/embed/ma6bDuaxETo", "v1.PNG", "33:30", 1, s2,false);
 		Video v5 = new Video("Course Preparation and Expectations", "https://www.youtube.com/embed/ma6bDuaxETo",
-				"v2.PNG", "15:30", 2, s2);
+				"v2.PNG", "15:30", 2, s2,true);
 		Video v6 = new Video("SailsMVC Setup and mLab MongoDB Atlas Sessions",
-				"https://www.youtube.com/embed/ma6bDuaxETo", "v3.PNG", "10:12", 1, s3);
+				"https://www.youtube.com/embed/ma6bDuaxETo", "v3.PNG", "10:12", 1, s4,true);
 
 		vr.save(v1);
 		vr.save(v2);

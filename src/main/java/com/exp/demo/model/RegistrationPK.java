@@ -10,7 +10,8 @@ public class RegistrationPK implements Serializable{
     private Long cours;
 
     private Long user;
-     
+    
+
 
 
 	public Long getCours() {
@@ -28,6 +29,10 @@ public class RegistrationPK implements Serializable{
 	public void setUser(Long user) {
 		this.user = user;
 	}
+	
+	
+
+
 
 	@Override
 	public boolean equals(Object arg0) {

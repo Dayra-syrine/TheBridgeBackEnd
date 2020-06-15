@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.exp.demo.model.Cour;
 import com.exp.demo.model.Section;
+import com.exp.demo.model.Video;
 import com.exp.demo.repo.CourRepository;
 import com.exp.demo.repo.SectionRepository;
+import com.exp.demo.repo.VideoRepository;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -31,8 +33,12 @@ public class CourController {
 
 	@Autowired
 	CourRepository cr;
+
 	@Autowired
 	SectionRepository sr;
+
+	@Autowired
+	VideoRepository vr;
 
 	@GetMapping(path = "/cour/getidCours/{id}", produces = "application/json")
 	public Optional<Cour> getCourById(@PathVariable(value = "id") Long courId) {
@@ -61,7 +67,7 @@ public class CourController {
 			}
 
 		}
-		return ls;
+		return nls;
 	}
 
 	@DeleteMapping("/cour/{id}")
@@ -89,18 +95,37 @@ public class CourController {
 		Cour updatedCour = cr.save(cour);
 		return updatedCour;
 	}
-	
-	
-	
+
 	@PutMapping("/cour/courImage/{id}")
 	public Cour updateImage(@PathVariable(value = "id") Long courId, @Valid @RequestBody String image) {
 
 		Cour cour = cr.findById(courId).get();
-		
+
 		cour.setImage(image);
 
 		Cour updatedImage = cr.save(cour);
 		return updatedImage;
+	}
+
+	@GetMapping(path = "/nbrVideo/{id}", produces = "application/json")
+	public void NbrVideoTotal(@PathVariable(value = "id") Long courId) {
+
+		Cour cour = cr.findById(courId).get();
+		int nbr = 0;
+		int nbS=0;
+		List<Section> ls = sr.findAll();
+		List<Video> lv = vr.findAll();
+		for (int i = 0; i < ls.size(); i++) {
+			if (ls.get(i).getCour().getId_C() == courId) {
+				nbr=nbr+ls.get(i).getVideo().size();
+				for (int j = 0; j < lv.size(); j++)
+					if (lv.get(j).getSection().getId_S() == ls.get(i).getId_S()) {
+						if (lv.get(j).getSeen_state() == true) {
+							nbS=nbS+1;}
+						}}}
+		
+
+		
 	}
 
 }
