@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -100,9 +99,6 @@ public class RegistrationController {
 
 	@GetMapping(path = "/VideoSeen", produces = "application/json")
 	public Boolean videoSeen(@RequestParam long idU, @RequestParam long idC, @RequestParam long idV) {
-
-		List<Registration> r1 = rr.findAll();
-		List<Registration> r2 = new ArrayList<Registration>();
 		Boolean add = false;
 		Boolean exist = false;
 
@@ -155,7 +151,7 @@ public class RegistrationController {
 
 		for (int i = 0; i < r1.size(); i++) {
 			if ((r1.get(i).getCours().getId_C() == idC) && (r1.get(i).getUser().getId_U() == idU)) {
-					
+
 				int VS = r1.get(i).getVideo_seen() + 1;
 				int percentage = (VS * 100) / nbr;
 				r1.get(i).setVideo_seen(VS);
@@ -175,11 +171,8 @@ public class RegistrationController {
 	@GetMapping(path = "/ListVideoSeen", produces = "application/json")
 	public List<Video> listVideoSeen(@RequestParam long idU) {
 
-		
 		List<Historique> lh = hr.findAll();
 		List<Video> lv = new ArrayList<Video>();
-		
-		
 
 		for (int i = 0; i < lh.size(); i++) {
 
@@ -188,19 +181,16 @@ public class RegistrationController {
 			}
 
 		}
-		
-	
 
 		return lv;
 	}
+
 	@GetMapping(path = "/verifVideoSeen", produces = "application/json")
 	public Boolean verifVideoSeen(@RequestParam long idU, @RequestParam long idV) {
-
-		Video video = vr.findById(idV).get();
 		List<Historique> lh = hr.findAll();
 		List<Video> lv = new ArrayList<Video>();
-		
-		Boolean checked=false;
+
+		Boolean checked = false;
 
 		for (int i = 0; i < lh.size(); i++) {
 
@@ -209,15 +199,15 @@ public class RegistrationController {
 			}
 
 		}
-		
-		
+
 		for (int k = 0; k < lv.size(); k++) {
-			if (lv.get(k).getId_V() == idV)  {
-				
-				checked=true;
-				
+			if (lv.get(k).getId_V() == idV) {
+
+				checked = true;
+
 				break;
-			}}
+			}
+		}
 
 		return checked;
 	}

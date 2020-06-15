@@ -110,7 +110,6 @@ public class CourController {
 	@GetMapping(path = "/nbrVideo/{id}", produces = "application/json")
 	public void NbrVideoTotal(@PathVariable(value = "id") Long courId) {
 
-		Cour cour = cr.findById(courId).get();
 		int nbr = 0;
 		int nbS=0;
 		List<Section> ls = sr.findAll();
